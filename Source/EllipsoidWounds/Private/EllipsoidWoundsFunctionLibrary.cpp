@@ -4,6 +4,7 @@
 #include "EllipsoidWoundsFunctionLibrary.h"
 
 #include "Components/SkeletalMeshComponent.h"
+#include "Runtime/Launch/Resources/Version.h"
 
 static FTransform GetBoneTransform(const USkeletalMeshComponent* SkelMesh, FName BoneName)
 {
@@ -11,7 +12,11 @@ static FTransform GetBoneTransform(const USkeletalMeshComponent* SkelMesh, FName
 
     if (SkelMesh && !BoneName.IsNone())
     {
+#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 3
         FReferenceSkeleton& RefSkel = SkelMesh->GetSkinnedAsset()->GetRefSkeleton();
+#else
+        FReferenceSkeleton& RefSkel = SkelMesh->SkeletalMesh->GetRefSkeleton();
+#endif
         BoneTransform = SkelMesh->GetBoneTransform(RefSkel.FindBoneIndex(BoneName));
     }
 
@@ -43,7 +48,11 @@ static FTransform GetRefPoseBoneTransform(const USkeletalMeshComponent* SkelMesh
     if (SkelMesh && !BoneName.IsNone())
     {
         //SkelMesh->ClearRefPoseOverride();
+#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 3
         FReferenceSkeleton& RefSkel = SkelMesh->GetSkinnedAsset()->GetRefSkeleton();
+#else
+        FReferenceSkeleton& RefSkel = SkelMesh->SkeletalMesh->GetRefSkeleton();
+#endif
 
         BoneTransform = GetWorldSpaceTransform(RefSkel, RefSkel.FindBoneIndex(BoneName));
     }
