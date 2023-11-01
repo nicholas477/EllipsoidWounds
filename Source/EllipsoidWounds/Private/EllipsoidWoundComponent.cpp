@@ -3,6 +3,7 @@
 
 #include "EllipsoidWoundComponent.h"
 
+#include "Components/SkeletalMeshComponent.h"
 #include "Engine/TextureRenderTarget2D.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "EllipsoidWoundsFunctionLibrary.h"
