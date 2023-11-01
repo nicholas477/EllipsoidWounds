@@ -12,7 +12,7 @@ static FTransform GetBoneTransform(const USkeletalMeshComponent* SkelMesh, FName
 
     if (SkelMesh && !BoneName.IsNone())
     {
-#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 3
+#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 2
         FReferenceSkeleton& RefSkel = SkelMesh->GetSkinnedAsset()->GetRefSkeleton();
 #else
         FReferenceSkeleton& RefSkel = SkelMesh->SkeletalMesh->GetRefSkeleton();
@@ -48,7 +48,7 @@ static FTransform GetRefPoseBoneTransform(const USkeletalMeshComponent* SkelMesh
     if (SkelMesh && !BoneName.IsNone())
     {
         //SkelMesh->ClearRefPoseOverride();
-#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 3
+#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 2
         FReferenceSkeleton& RefSkel = SkelMesh->GetSkinnedAsset()->GetRefSkeleton();
 #else
         FReferenceSkeleton& RefSkel = SkelMesh->SkeletalMesh->GetRefSkeleton();
